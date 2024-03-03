@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/codeCpp/modernCpp/src/shared_weak_ptr.cpp
+iostream
+-
+memory
+-
+thread
+-
+functional
+-
+

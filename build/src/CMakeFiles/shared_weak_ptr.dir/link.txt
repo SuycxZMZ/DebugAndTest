@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/shared_weak_ptr.dir/shared_weak_ptr.cpp.o  -o ../../bin/shared_weak_ptr  -lpthread 

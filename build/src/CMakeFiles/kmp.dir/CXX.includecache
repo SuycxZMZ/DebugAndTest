@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/codeCpp/modernCpp/src/leetcode/kmp.cpp
+vector
+-
+iostream
+-
+algorithm
+-
+climits
+-
+cmath
+-
+

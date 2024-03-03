@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/union_find.dir/leetcode/union_find.cpp.o  -o ../../bin/union_find  -lpthread 

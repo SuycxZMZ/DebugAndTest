@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/codeCpp/modernCpp/src/leetcode/polandnotation.cpp
+iostream
+-
+string
+-
+vector
+-
+stack
+-
+cmath
+-
+algorithm
+-
+

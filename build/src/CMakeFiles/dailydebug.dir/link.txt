@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/dailydebug.dir/leetcode/dailydebug.cpp.o  -o ../../bin/dailydebug  -lpthread 

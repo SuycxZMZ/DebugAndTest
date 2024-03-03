@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/codeCpp/modernCpp/src/leetcode/basicAPI.cpp
+cmath
+-
+queue
+-
+deque
+-
+vector
+-
+algorithm
+-
+stack
+-
+functional
+-
+iostream
+-
+

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/polandnotation.dir/leetcode/polandnotation.cpp.o  -o ../../bin/polandnotation  -lpthread 
