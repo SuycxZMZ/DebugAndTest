@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/kmp.dir/leetcode/kmp.cpp.o  -o ../../bin/kmp  -lpthread 

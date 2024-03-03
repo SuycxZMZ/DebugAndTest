@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/basicAPI.dir/leetcode/basicAPI.cpp.o  -o ../../bin/basicAPI  -lpthread 
