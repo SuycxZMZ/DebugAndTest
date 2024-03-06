@@ -107,10 +107,52 @@ public:
 
         return dis;
     }
-
+    // 找 0 --> n-1 最短路径的数量  --> 朴素 dijkstra 算法
     int countPaths(int n, vector<vector<int>>& roads) 
     {
+        vector<vector<pair<int, long long>>> graph;
+        graph.resize(n);
+        for (vector<int> &road : roads) 
+        {
+            int n1 = road[0], n2 = road[1], c = road[2];
+            graph[n1].emplace_back(n2, c);
+            graph[n2].emplace_back(n1, c);
+        }
 
+        constexpr int N = 1e9 + 7;
+        vector<long long> dist(n, LONG_LONG_MAX);
+        vector<int> mark(n, 0);
+        vector<int> cnt(n, 0);
+        dist[0] = 0;
+        cnt[0] = 1;
+        for (int i = 0; i + 1 < n; i++) 
+        {
+            long long minInd = -1, minDis = LONG_LONG_MAX;
+            for (int j = 0; j < n; j++) 
+            {
+                if (mark[j] == 0 && dist[j] < minDis) 
+                {
+                    minDis = dist[j];
+                    minInd = j;
+                }
+            }
+            mark[minInd] = 1;
+            if (minInd == n - 1) break;
+            for (auto [n2, cost] : graph[minInd]) 
+            {
+                long long newCost = minDis + cost;
+                if (newCost < dist[n2]) 
+                {
+                    dist[n2] = newCost;
+                    cnt[n2] = cnt[minInd];
+                } 
+                else if (newCost == dist[n2]) 
+                {
+                    cnt[n2] = (cnt[n2] + cnt[minInd]) % N;
+                }
+            }
+        }
+        return cnt[n - 1];
     }
 };
 
