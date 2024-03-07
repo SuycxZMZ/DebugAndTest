@@ -52,59 +52,34 @@ public:
         return dis;
     }
     // 朴素 dijkstra
-    vector<ll> dijkstra2(vector<vector<int>> &roads, int s) 
+    vector<int> dijkstra2(vector<vector<int>> &roads, int k, int n) 
     {
-        // 邻接表
-        vector<vector<pair<int, int>>> adj;
-        // 节点个数
-        int n = 0;
-        for (auto road : roads)
+        // 邻接矩阵
+        vector<vector<int>> g(n, vector<int>(n, INT_MAX/2));
+        for (auto &road : roads) 
         {
-            n = max(n, max(road[0], road[1]) + 1);
+            g[road[0] - 1][road[1] - 1] = road[2];
+            g[road[1] - 1][road[0] - 1] = road[2];
         }
-        adj.resize(n);
-        for (auto road : roads)
+        vector<int> dis(n, INT_MAX/2), done(n);
+        dis[k - 1] = 0;
+        while (true)
         {
-            int x = road[0], y = road[1], w = road[2];
-            adj[x].emplace_back(y, w);
-            adj[y].emplace_back(x, w);
-        }
-        vector<ll> dis(n, INT_MAX);
-        vector<bool> visit(n, false);
-        visit[s] = true;
-        dis[s] = 0;
-        while (1)
-        {
-            // 每一轮 找未添加且距离最小的点
             int x = -1;
             for (int i = 0; i < n; ++i)
             {
-                // 添加过， 直接下一个
-                if (visit[i]) continue;
-                // 没添加
-                if (x < 0 || dis[i] < dis[x])
-                {
-                    x = i;
-                }
+                if (!done[i] && (x < 0 || dis[i] < dis[x])) x = i;
             }
 
-            // 找完，如果全部添加完，x == -1，可以直接退出while
-            // 如果找到的最小距离为 INT_MAX 则该 x 不可达
-            if (x == -1) break;
-            if (dis[x] == INT_MAX)
+            if (x < 0) break;
+            done[x] = true;
+            
+            for (int y = 0; y < n; ++y)
             {
-                visit[x] = true;
-                continue;
-            }
-
-            // 找到未添加的最小距离, 把该点的邻接点全扫描一遍
-            visit[x] = true;
-            for (auto & [v, w] : adj[x])
-            {
-                dis[v] = min(dis[v], dis[x] + w);
+                dis[y] = min(dis[y], dis[x] + g[x][y]);
             }
         }
-
+        
         return dis;
     }
     // 找 0 --> n-1 最短路径的数量  --> 朴素 dijkstra 算法
@@ -158,6 +133,18 @@ public:
 
 int main()
 {
+    vector<vector<int>> roads = {{1,2,5}, {2,3,6}, {3,6,1}, {5,6,2}, {3,5,2}, {1,4,7}, {4,5,1}};
+    Solution s_s;
 
+    vector<long long> dis2 = s_s.dijkstra(roads, 1);
+    vector<int> dis = s_s.dijkstra2(roads, 1, 6);
+
+    cout << "--- classic dijkstra all min dis : ";
+    for (int d : dis) cout << d << " " ;
+    cout << endl;
+
+    cout << "--- heap dijkstra all min dis : ";
+    for (int i = 1; i < dis2.size(); ++i) cout << dis2[i] << " ";
+    cout << endl;
     return 0;
 }
