@@ -148,16 +148,16 @@ namespace thread_Ref
 
 int main()
 {
-    // cyc_Ref::test();
+    cyc_Ref::test();
     // okcyc_Ref::test();
     // thread_Ref::test_safe();
 
     // 自定义删除器
-    unique_ptr<FILE, function<void(FILE* )>> ptr1(fopen("test.cpp", "w"), 
-                                                  [](FILE* f)->void
-                                                  { 
-                                                    cout << "close file" << endl;
-                                                    fclose(f); 
-                                                  });
+    // unique_ptr<FILE, function<void(FILE* )>> ptr1(fopen("test.cpp", "w"), 
+    //                                               [](FILE* f)->void
+    //                                               { 
+    //                                                 cout << "close file" << endl;
+    //                                                 fclose(f); 
+    //                                               });
     return 0;
 }

@@ -94,9 +94,6 @@ public:
         m = board.size();
         n = board[0].size();
 
-        queue<pair<int, int>> Q;
-        vector<vector<int>> visited(m, vector<int>(n, 0));
-
         string word = "";
         for (int i = 0; i < m; i++) 
         {
@@ -107,10 +104,7 @@ public:
             }
         }
      
-        for (auto s: uset) 
-        {
-            ans.emplace_back(s);
-        }
+        for (auto s: uset) ans.emplace_back(s);
 
         return ans;
     }
@@ -123,7 +117,7 @@ public:
         if (root->child[index] == NULL) return;
         // 访问标记
         if (c == '0') return;
-        board[i][j] = '0';
+        // board[i][j] = '0';
         word += c;
         if (root->child[index]->isEnd) uset.emplace(word);
 

@@ -129,6 +129,20 @@ public:
         }
         return cnt[n - 1];
     }
+
+    // 
+    vector<int> dijkstra3(vector<vector<pair<int, int>>> &adj, vector<int> &pweight, int k) {
+        using LL = long long;
+        int n = adj.size();
+        vector<LL> dis(n, LLONG_MAX / 2);
+        dis[k] = 0;
+        priority_queue<pair<LL, int>, vector<pair<LL, int>>, greater<>> pq;
+        pq.emplace(0, k);
+
+        while (!pq.empty()) {
+            auto [w, v] = pq.top();
+        }
+    }
 };
 
 int main()
