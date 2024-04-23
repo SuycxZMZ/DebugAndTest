@@ -9,59 +9,62 @@ using namespace std;
 class Solution 
 {
 private:
-    // next 数组 第 i 位表示 0--i 最长相等前后缀长度
-    void getNext(vector<int>& next, string needle)
-    {
-        if (next.size() != needle.length())
-        {
-            cout << "error input !!!" << endl;
-            return;
-        }
-        int j = 0;
+    /**
+     * @brief 求最长相等前后缀
+     * @details i 作为后缀末尾，j作为前缀末尾
+     * @param next 最长相等前后缀数组
+     * @param needle 模式串
+     */
+    void getnext2(std::vector<int>& next, std::string needle) {
         next[0] = 0;
-        for (int i = 1; i < needle.size(); ++i)
-        {
-            while (j > 0 && needle[j] != needle[i])
-            {
+        int j = 0;
+        for (int i = 0; i < next.size(); ++i) {
+            // j 回退
+            while (j > 0 && needle[j] != needle[i]) {
                 j = next[j - 1];
             }
-            if (needle[i] == needle[j]) ++j;
+            if (needle[j] == needle[i]) ++j;
             next[i] = j;
         }
     }
 
 public:
-    // ******************* 匹配第一个索引 ******************* //
-    int strStr(string haystack, string needle) 
-    {
-        if (needle.size() == 0) return 0;
-        vector<int> next(needle.size(), 0);
-        getNext(next, needle);
-
-        // 开始主串匹配
+    /**
+     * @details KMP
+     * @param basic_s 主串
+     * @param needle_s 模式串
+     * @return 第一个匹配索引,没匹配到，返回-1
+     */
+    int mystrStr(std::string basic_s, std::string needle_s) {
+        int len1 = basic_s.length(), len2 = needle_s.length();
+        vector<int> next(len2, 0);
+        getnext2(next, needle_s);
+        // 开始KMP匹配
         int j = 0;
-        for (int i = 0; i < haystack.size(); ++i)
-        {
-            while (j > 0 && haystack[i] != needle[j]) 
-            {
+        for (int i = 0; i < len1; ++i) {
+            while (j > 0 && basic_s[i] != needle_s[j]) {
                 j = next[j - 1];
             }
-            if (haystack[i] == needle[j]) ++j;
-            if (j == needle.size())
-            {
-                // 匹配到一个就直接退出
-                return (i - needle.size() + 1);
+            if (basic_s[i] == needle_s[j]) ++j;
+            if (j == next.size()) {
+                return (i - next.size() + 1);
             }
         }
         return -1;
     }
 
-    // ******************* 匹配所有索引 ******************* //
-    vector<int> strStr_all(string haystack, string needle) 
+    /**
+     * @brief 匹配所有索引
+     * @details 每次得到一个匹配之后收结果集，进行模式串回退
+     * @param haystack 主串
+     * @param needle 模式串
+     * @return 返回所有索引的vector
+     */
+    vector<int> strStr_all(string haystack, string needle)
     {
         if (needle.size() == 0) return vector<int>{};
         vector<int> next(needle.size(), 0);
-        getNext(next, needle);
+        getnext2(next, needle);
 
         vector<int> result;
         // 开始主串匹配
@@ -96,7 +99,7 @@ int main()
     std::string haystack = "mymymhellomymymym";
     std::string needle = "mym";
     vector<int> result = s_s.strStr_all(haystack, needle);
-    int res = s_s.strStr(haystack, needle);
+    int res = s_s.mystrStr(haystack, "hello");
     for (auto & idx : result)
     {
         std::cout << idx << ' ';
