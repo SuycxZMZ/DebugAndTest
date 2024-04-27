@@ -1,5 +1,5 @@
 # 遍历源文件列表
-file(GLOB SOURCE_FILES "*.cpp" ./leetcode/*.cpp)
+file(GLOB SOURCE_FILES "*.cpp" ./Leetcode/*.cpp ./DPatten/*.cpp)
 #file(GLOB SOURCE_FILES "*.cpp" ./leetcode/trie.dSYM/*.cpp)
 # 编译每个源文件为可执行文件
 foreach(source_file ${SOURCE_FILES})

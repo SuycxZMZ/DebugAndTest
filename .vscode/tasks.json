@@ -10,7 +10,8 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-std=c++20",
             ],
             "options": {
                 "cwd": "${fileDirname}"
