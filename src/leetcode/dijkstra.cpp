@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <climits>
+#include <numeric>
 #include <cstring>
 #include <cmath>
 using namespace std;
@@ -95,14 +96,14 @@ public:
         }
 
         constexpr int N = 1e9 + 7;
-        vector<long long> dist(n, LONG_LONG_MAX);
+        vector<long long> dist(n, LLONG_MAX);
         vector<int> mark(n, 0);
         vector<int> cnt(n, 0);
         dist[0] = 0;
         cnt[0] = 1;
         for (int i = 0; i + 1 < n; i++) 
         {
-            long long minInd = -1, minDis = LONG_LONG_MAX;
+            long long minInd = -1, minDis = LLONG_MAX;
             for (int j = 0; j < n; j++) 
             {
                 if (mark[j] == 0 && dist[j] < minDis) 
@@ -128,20 +129,6 @@ public:
             }
         }
         return cnt[n - 1];
-    }
-
-    // 
-    vector<int> dijkstra3(vector<vector<pair<int, int>>> &adj, vector<int> &pweight, int k) {
-        using LL = long long;
-        int n = adj.size();
-        vector<LL> dis(n, LLONG_MAX / 2);
-        dis[k] = 0;
-        priority_queue<pair<LL, int>, vector<pair<LL, int>>, greater<>> pq;
-        pq.emplace(0, k);
-
-        while (!pq.empty()) {
-            auto [w, v] = pq.top();
-        }
     }
 };
 
