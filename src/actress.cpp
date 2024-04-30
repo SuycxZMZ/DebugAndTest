@@ -20,7 +20,7 @@ public:
     //     printf("I'm a actress");
     // }
 
-    virtual ~Actress() {};
+    virtual ~Actress() { printf("~Actress\n"); };
 
     int height; // 身高
     int weight; // 体重
@@ -38,6 +38,9 @@ public:
     virtual void name() override {
         printf("I'm a sensei");
     }
+
+    virtual ~Sensei() { printf("~Sensei\n"); };
+private:
     char cup[4];
 };
 
@@ -50,5 +53,9 @@ int main() {
 
     Actress& a2 = s;
     a2.desc();
+
+    Actress* a3 = new Sensei(170, 50, 20, "36D");
+    delete a3;
+
     return 0;
 }
