@@ -25,6 +25,8 @@ private:
             if (needle[i] == needle[j]) ++j;
             next[i] = j;
         }
+        for (int i : next) std::cout << i << " ";
+        std::cout << "--------------" << std::endl;
     }
 
 public:
@@ -85,7 +87,7 @@ int main()
     // std::string needle = "abc";
 
     std::string haystack = "mymymhellomymymym";
-    std::string needle = "mym";
+    std::string needle = "bccabcaac";
     vector<int> result = s_s.strStr_all(haystack, needle);
     int res = s_s.mystrStr(haystack, "mymymym");
     for (auto & idx : result)
