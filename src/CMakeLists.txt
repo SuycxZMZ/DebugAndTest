@@ -1,5 +1,5 @@
 # 遍历源文件列表
-file(GLOB SOURCE_FILES "*.cpp" ./Leetcode/*.cpp ./DPatten/*.cpp ./ThreadCommunication/*.cpp)
+file(GLOB SOURCE_FILES "*.cpp" ./Leetcode/*.cpp ./DPatten/*.cpp ./ThreadCommunication/*.cpp ./IOuring/*.cc)
 #file(GLOB SOURCE_FILES "*.cpp" ./leetcode/trie.dSYM/*.cpp)
 # 编译每个源文件为可执行文件
 foreach(source_file ${SOURCE_FILES})
@@ -8,7 +8,7 @@ foreach(source_file ${SOURCE_FILES})
     # 添加可执行文件
     add_executable(${executable_name} ${source_file})
     # 指定链接文件
-    target_link_libraries(${executable_name} pthread)
+    target_link_libraries(${executable_name} pthread uring)
 endforeach()
 
 
