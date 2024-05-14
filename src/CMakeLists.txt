@@ -8,7 +8,7 @@ foreach(source_file ${SOURCE_FILES})
     # 添加可执行文件
     add_executable(${executable_name} ${source_file})
     # 指定链接文件
-    target_link_libraries(${executable_name} pthread uring)
+    target_link_libraries(${executable_name} /usr/lib/liburing.a pthread)
 endforeach()
 
 

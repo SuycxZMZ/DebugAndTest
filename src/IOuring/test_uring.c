@@ -74,8 +74,10 @@ int main(int argc, char *argv[])
 	i = 0;
 	do {
 		sqe = io_uring_get_sqe(&ring);	// 获取可用 SQE
-		if (!sqe)
+		if (!sqe) {
+			printf("sqe == NULL");
 			break;
+		}
 		io_uring_prep_readv(sqe, 		// 用这个 SQE 准备一个待提交的 read 操作
 							fd, 		// 从 fd 打开的文件中读取数据
 							&iovecs[i], // iovec 地址，读到的数据写入 iovec 缓冲区
