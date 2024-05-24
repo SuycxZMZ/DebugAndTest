@@ -20,6 +20,9 @@ struct TreeNode {
 
 class Solution {
 public:
+    /**
+     * @brief 前 + 中
+    */
     TreeNode* buildTree(std::vector<int>& preorder, std::vector<int>& inorder) {
         int n = preorder.size();
         std::unordered_map<int, int> pos;
