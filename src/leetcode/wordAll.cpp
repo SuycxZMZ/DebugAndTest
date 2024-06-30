@@ -8,6 +8,11 @@
 
 using namespace std;
 
+// 1:单词拆分
+// 2:最长回文子串，中心扩散写法
+// 3:最长回文子串，动态规划写法
+// 4:不同子序列，动态规划
+
 class Solution {
 public:
     // 单词拆分：给你一个字符串 s 和一个字符串列表 wordDict 作为字典。
@@ -78,6 +83,29 @@ public:
             }
         }
         return s.substr(maxStart, maxLen);
+    }
+
+    // 不同子序列，给你两个字符串 s 和 t ，统计并返回在 s 的 子序列 中 t 出现的个数
+    int numDistinct(string s, string t) {
+        // f[i][j] 代表 以 i - 1 为结尾的 s 中有多少个以 j - 1 结尾的 t
+        int sl = s.size(), tl = t.size();
+        if (tl > sl) return 0;
+
+        vector<vector<uint64_t>> f(sl + 1, vector<uint64_t>(tl + 1, 0));
+        for (int i = 1; i <= sl; ++i) f[i][0] = 1;
+        f[0][0] = 1;
+        for (int i = 1; i <= sl; ++i) {
+            for (int j = 1; j <= tl; ++j) {
+                // 递推，如果相等，那么就是相等与不相等的和
+                if (s[i - 1] == t[j - 1]) {
+                    f[i][j] = f[i - 1][j - 1] + f[i - 1][j];
+                } else {
+                    // 如果不相等，i就往前退一位
+                    f[i][j] = f[i - 1][j];
+                }
+            }
+        }
+        return f[sl][tl] % 1000000007;
     }
 };
 
