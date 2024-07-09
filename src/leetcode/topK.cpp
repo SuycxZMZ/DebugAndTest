@@ -50,7 +50,6 @@ public:
 
     /**
      * @brief 快排优化
-     * @details [FIX ME]
      * @param words
      * @param k
      * @return
