@@ -107,6 +107,25 @@ public:
         }
         return f[sl][tl] % 1000000007;
     }
+
+    // 编辑距离
+    int minDistance(string s, string t) {
+        int sl = s.size(), tl = t.size();
+        vector<vector<int>> f(sl + 1, vector<int>(tl + 1, 0));
+        for (int i = 0; i <= sl; ++i) f[i][0] = i;
+        for (int i = 0; i <= tl; ++i) f[0][i] = i;
+
+        for (int i = 1; i <= sl; ++i) {
+            for (int j = 1; j <= tl; ++j) {
+                if (s[i - 1] == t[j - 1]) {
+                    f[i][j] = f[i - 1][j - 1];
+                } else {
+                    f[i][j] = min(min(f[i - 1][j], f[i][j - 1]) + 1, f[i - 1][j - 1] + 1);
+                }
+            }
+        }
+        return f[sl][tl];
+    }
 };
 
 int main() {
