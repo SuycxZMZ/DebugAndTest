@@ -11,7 +11,8 @@ using namespace std;
 // 1:单词拆分
 // 2:最长回文子串，中心扩散写法
 // 3:最长回文子串，动态规划写法
-// 4:不同子序列，动态规划
+// 4:不同子序列，动态规划。第一道是，t是否是s的子序列，第二道是t在s的子序列中出现了几次
+// 5:编辑距离，动态规划
 
 class Solution {
 public:
@@ -85,6 +86,23 @@ public:
         return s.substr(maxStart, maxLen);
     }
 
+    // t是否是s的子序列
+    bool isSubsequence(string t, string s) {
+        int tl = t.size(), sl = s.size();
+        if (tl == 0) return true;
+        vector<vector<bool>> f(sl + 1, vector<bool>(tl + 1, false));
+        for (int i = 0; i <= sl; ++i) f[i][0] = true;
+        for (int i = 1; i <= sl; ++i) {
+            for (int j = 1; j <= tl; ++j) {
+                if (s[i - 1] == t[j - 1]) {
+                    f[i][j] = f[i - 1][j - 1] | f[i - 1][j];
+                } else {
+                    f[i][j] = f[i - 1][j];
+                }
+            }
+        }
+        return f[sl][tl];
+    }
     // 不同子序列，给你两个字符串 s 和 t ，统计并返回在 s 的 子序列 中 t 出现的个数
     int numDistinct(string s, string t) {
         // f[i][j] 代表 以 i - 1 为结尾的 s 中有多少个以 j - 1 结尾的 t
