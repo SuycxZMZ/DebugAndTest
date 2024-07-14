@@ -5,12 +5,11 @@
 #include <vector>
 #include <algorithm>
 
+// 1.三数之和
+// 2.四数之和
 class Solution {
 public:
-    /**
-     * @brief 三数之和，返回相加等于0的三元组
-     *
-     * */
+    // 三数之和
     std::vector<std::vector<int>> threeSum(std::vector<int> &nums) {
         int n = nums.size();
         std::sort(nums.begin(), nums.end());
@@ -38,10 +37,7 @@ public:
         return ans;
     }
 
-    /**
-     * @brief 四数之和，相加等于target
-     *
-     * */
+    // 四数之和
     std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target) {
         std::sort(nums.begin(), nums.end());
         int n = nums.size();
