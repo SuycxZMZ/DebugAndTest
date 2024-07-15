@@ -13,13 +13,14 @@ private:
     int n = 10000;
     vector<int> father;
 public:
-    unionFound() : father(n, 0) {};
-    unionFound(int _n) : n(_n), father(n, 0) {};
+    unionFound() : father(n, 0) { init(); };
+    unionFound(int _n) : n(_n), father(n, 0) { init(); };
     // 并查集初始化
     void init()
     {
         for (int i = 0; i < n; ++i) father[i] = i;
     }
+
     // find过程
     int find(int u)
     {
@@ -27,6 +28,7 @@ public:
         // 路径压缩
         else return father[u] = find(father[u]);
     }
+
     // 判断 u 和 v 是否同根
     bool isSame(int u, int v)
     {
@@ -34,13 +36,14 @@ public:
         v = find(v);
         return u == v;
     }
-    // 将 v --> u 加入并查集
+
+    // u为根，v为子节点，加入并查集
     void join(int u, int v)
     {
         u = find(u);
         v = find(v);
-        if (u == v) return; // 同根
-        else father[v] = u;
+        if (u == v) return; // 同根，已经加入了，就不用再次加入
+        else father[v] = u; // 否则就加入
     }
 };
 
