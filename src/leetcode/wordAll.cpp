@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ using namespace std;
 
 class Solution {
 public:
-    // 单词拆分：给你一个字符串 s 和一个字符串列表 wordDict 作为字典。
+    // 1.单词拆分：给你一个字符串 s 和一个字符串列表 wordDict 作为字典。
     // 如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
     bool wordBreak(string s, vector<string>& wordDict) {
         unordered_set<string> uset(wordDict.begin(), wordDict.end());
@@ -38,7 +39,7 @@ public:
         return f[s.size()];
     }
 
-    // 最长回文子串
+    // 2.最长回文子串
     // 中心扩散，从每一个位置开始，向左右各自扩散到与当前位置不想等，然后比较左右，直到再次不想等
     string longestPalindrome(string s) {
         if (s.size() <= 1) return s;
@@ -67,7 +68,7 @@ public:
         }
         return s.substr(maxStart + 1, maxLen);
     }
-    // dp，记录状态 f[l][r] 表示 l-->r 是否回文
+    // 3.dp，记录状态 f[l][r] 表示 l-->r 是否回文
     string longestPalindrome2(string s) {
         if (s.size() <= 1) return s;
         int sl = s.size(), maxStart = 0, maxLen = 1;
@@ -86,7 +87,7 @@ public:
         return s.substr(maxStart, maxLen);
     }
 
-    // t是否是s的子序列
+    // 4.t是否是s的子序列
     bool isSubsequence(string t, string s) {
         int tl = t.size(), sl = s.size();
         if (tl == 0) return true;
@@ -103,7 +104,7 @@ public:
         }
         return f[sl][tl];
     }
-    // 不同子序列，给你两个字符串 s 和 t ，统计并返回在 s 的 子序列 中 t 出现的个数
+    // 4.不同子序列，给你两个字符串 s 和 t ，统计并返回在 s 的 子序列 中 t 出现的个数
     int numDistinct(string s, string t) {
         // f[i][j] 代表 以 i - 1 为结尾的 s 中有多少个以 j - 1 结尾的 t
         int sl = s.size(), tl = t.size();
@@ -126,7 +127,7 @@ public:
         return f[sl][tl] % 1000000007;
     }
 
-    // 编辑距离
+    // 5.编辑距离
     int minDistance(string s, string t) {
         int sl = s.size(), tl = t.size();
         vector<vector<int>> f(sl + 1, vector<int>(tl + 1, 0));
