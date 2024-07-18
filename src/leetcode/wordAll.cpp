@@ -21,51 +21,54 @@ public:
     // 如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
     bool wordBreak(string s, vector<string>& wordDict) {
         unordered_set<string> uset(wordDict.begin(), wordDict.end());
-        // 长度为i  且从0开始的字符串是否合法
-        vector<bool> f(s.size() + 1, false);
-        // 遍历长度
+        uset.emplace("");
+        // 长度为i 从0开始的字符串是否合法
+        int n = s.size();
+        vector<bool> f(n + 1, false);
         f[0] = true;
+
         string tmp = "";
-        for (int i = 1; i <= s.size(); ++i) {
-            // 切分，如果前半部分合法且后半部分在集合，则本轮的合法
+        for (int i = 1; i <= n; ++i) {
             for (int j = 0; j < i; ++j) {
                 tmp = s.substr(j, i - j);
-                if (f[j] && uset.find(tmp) != uset.end()) {
+                if (f[j] && uset.count(tmp) != 0) {
                     f[i] = true;
                     break;
                 }
             }
         }
-        return f[s.size()];
+        return f[n];
     }
 
     // 2.最长回文子串
     // 中心扩散，从每一个位置开始，向左右各自扩散到与当前位置不想等，然后比较左右，直到再次不想等
     string longestPalindrome(string s) {
-        if (s.size() <= 1) return s;
-        int sl = s.size();
-        int l = 0, r = 0, len = 1, maxStart = 0, maxLen = 0;
-        // 枚举中心位置
-        for (int i = 0; i < sl; ++i) {
-            l = i - 1, r = i + 1; // 左右指针位置
+        string s0 = "";
+        int n = s.size();
+        if (n <= 1) return s;
+        int maxStart = 0, maxLen = 0;
+        for (int i = 0; i < n; ++i) {
+            int l = i - 1, r = i + 1, len = 1;
             while (l >= 0 && s[l] == s[i]) {
-                ++len;
                 --l;
-            }
-            while (r < sl && s[r] == s[i]) {
                 ++len;
+            }
+            while (r < n && s[r] == s[i]) {
                 ++r;
+                ++len;
             }
-            while (l >= 0 && r < sl && s[l] == s[r]) {
+            while (l >= 0 && r < n && s[l] == s[r]) {
+                --l;
+                ++r;
                 len += 2;
-                --l; ++r;
             }
+
             if (len > maxLen) {
-                maxLen = len;
                 maxStart = l;
+                maxLen = len;
             }
-            len = 1;
         }
+
         return s.substr(maxStart + 1, maxLen);
     }
     // 3.dp，记录状态 f[l][r] 表示 l-->r 是否回文
@@ -151,6 +154,17 @@ int main() {
     string s = "leetcodebook";
     vector<string> wordDict = {"lee", "t", "code", "book"};
     bool res = Solution().wordBreak(s, wordDict);
+    cout << "***************** 1 *****************" << endl;
     cout << "res:" << res << endl;
+    cout << "***************** 2 *****************" << endl;
+    cout << "res:" << Solution().longestPalindrome("babad") << endl;
+    cout << "***************** 3 *****************" << endl;
+
+    cout << "***************** 41*****************" << endl;
+
+    cout << "***************** 42*****************" << endl;
+
+    cout << "***************** 5 *****************" << endl;
+
     return 0;
 }
