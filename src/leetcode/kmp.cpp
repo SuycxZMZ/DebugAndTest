@@ -17,16 +17,16 @@ private:
      */
     void getnext(std::vector<int>& next, std::string needle) {
         int len = needle.size();
+        // 最长相等前后缀长度
         int j = 0;
         next[0] = 0;
         // 枚举后缀
         for (int i = 1; i < len; ++i) {
+            // 回退
             while (j > 0 && needle[j] != needle[i]) j = next[j - 1];
             if (needle[i] == needle[j]) ++j;
             next[i] = j;
         }
-        for (int i : next) std::cout << i << " ";
-        std::cout << "--------------" << std::endl;
     }
 
 public:
