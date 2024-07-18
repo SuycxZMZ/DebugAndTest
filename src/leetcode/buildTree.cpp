@@ -8,6 +8,7 @@
 #include <cmath>
 #include <functional>
 #include <unordered_map>
+#include <numeric>
 
 struct TreeNode {
     int val;
