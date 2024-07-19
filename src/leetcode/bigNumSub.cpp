@@ -19,6 +19,7 @@ string removeLeadingZeros(const string& num) {
     return start == num.size() ? "0" : num.substr(start);
 }
 
+// ******************************** 减法 ******************************** //
 // 大数相减，假设a >= b
 string subtractStrings(const string& a, const string& b) {
     string result;
@@ -63,6 +64,40 @@ string subtractLargeNumbers(const string& num1, const string& num2) {
         return subtractStrings(a, b);
     }
 }
+// ******************************** 减法 ******************************** //
+
+// ******************************** 加法 ******************************** //
+// 大数相加，假设 a > 0 , b > 0
+string sumtractStrings(const string& a, const string& b) {
+    int len1 = a.length(), len2 = b.length();
+
+    string ans = "";
+    int carry = 0;
+    for (int i = 0; i < len1; ++i) {
+        int digitA = a[len1 - 1 - i] - '0';
+        int digitB = i < len2 ? b[len2 - 1 - i] - '0' : 0;
+
+        int digit = digitA + digitB + carry;
+        if (digit >= 10) {
+            carry = 1;
+            digit -= 10;
+        } else {
+            carry = 0;
+        }
+        ans.push_back(digit + '0');
+    }
+    reverse(ans.begin(), ans.end());
+    return removeLeadingZeros(ans);
+}
+string sumtractLargeNumbers(const string& num1, const string& num2) {
+    string a = num1, b = num2;
+    int cmp = compareStrings(a, b);
+    if (cmp < 0) {
+        swap(a, b);
+    }
+    return sumtractStrings(a, b);
+}
+// ******************************** 加法 ******************************** //
 
 int main() {
     string num1, num2;
@@ -70,6 +105,9 @@ int main() {
 
     string result = subtractLargeNumbers(num1, num2);
     cout << result << endl;
+
+    string sumres = sumtractLargeNumbers(num1, num2);
+    cout << sumres << endl;
 
     return 0;
 }
