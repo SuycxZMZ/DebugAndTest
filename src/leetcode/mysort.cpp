@@ -1,8 +1,13 @@
 //
 // Created by yuan su on 24-4-23.
 //
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+
+struct cmpgreater_int {
+    bool operator()(const int& a, const int& b) {
+        return a > b;
+    }
+};
 
 class allSort {
 public:
@@ -13,20 +18,22 @@ public:
      * @param left
      * @param right
      */
-    template<typename T>
-    void _qqsort(std::vector<T>& input, int left, int right) {
-        int i = left;
-        int j = right;
-        int privot = input[(i + j) / 2];
+    template<typename T, typename Compare = std::less<T>>
+    void _qqsort(std::vector<T>& input, int left, int right, Compare cmp = Compare()) {
+        int i = left, j = right;
+        if (i >= j) return;
+        T privot = input[(i + j) / 2];
+
         while (i <= j) {
-            while (input[i] < privot) ++i;
-            while (input[j] > privot) --j;
+            while (i <= j && cmp(input[i], privot)) ++i;
+            while (i <= j && cmp(privot, input[j])) --j;
             if (i <= j) {
                 std::swap(input[i++], input[j--]);
             }
         }
-        if (j > left) _qqsort(input, left, j);
-        if (i < right) _qqsort(input, i, right);
+
+        if (j > left) _qqsort(input, left, j, cmp);
+        if (i < right) _qqsort(input, i, right, cmp);
     }
 
 
@@ -98,8 +105,8 @@ public:
 int main() {
     allSort as;
 
-    std::vector<int> arr = {5, 2, 9, 1, 5, 6};
-    as._qqsort(arr, 0, arr.size() - 1);
+    std::vector<int> arr = {5, 2, 9, 1, 5, 6, 3, 8, 20, 10, 100, 21, 12};
+    as._qqsort(arr, 0, arr.size() - 1, cmpgreater_int());
     std::cout << "--------------qsort-------------" << std::endl;
     for (int i : arr) std::cout << i << " ";
     std::cout << std::endl;
