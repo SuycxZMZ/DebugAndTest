@@ -1,7 +1,8 @@
 # 1. 配置ssh
 
     sudo apt update
-    sudo apt install openssh-server gcc g++ gdb make cmake git net-tools linux-tools-generic
+    sudo apt install build-essential
+    sudo apt install openssh-server gdb cmake git net-tools linux-tools-generic
 
 
 确认SSH服务正在运行
