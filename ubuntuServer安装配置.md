@@ -1,7 +1,8 @@
 # 1. 配置ssh
 
     sudo apt update
-    sudo apt install openssh-server gcc g++ gdb make cmake git net-tools
+    sudo apt install openssh-server gcc g++ gdb make cmake git net-tools linux-tools-generic
+
 
 确认SSH服务正在运行
     sudo systemctl status ssh
@@ -36,4 +37,12 @@ windows 生成公钥
 在vscode的config中，在要登录的Host最后加上私钥认证：
     IdentityFile C:\Users\用户名\.ssh\id_rsa
 
+
 检查内核版本  uname -r
+apt安装的包卸载 
+    sudo apt-get remove 软件包名
+    sudo apt-get autoremove
+
+后台运行程序，比如redis
+    sudo systemctl start redis
+    sudo systemctl stop redis
