@@ -11,5 +11,5 @@ src/leetcode 平时刷题
 src/ThCommun 线程通信例子
 
     cd build
-    cmake ..
+    cmake .. -DCMAKE_BUILD_TYPE=Release/Debug/RelWithDebInfo
     make
