@@ -2,3 +2,4 @@ build/*
 bin/*
 src/leetcode/dailydebug.cpp
 tools/*
+src/MapReduce/wordFiles/*
