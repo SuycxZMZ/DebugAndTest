@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 project(modernCpp)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 # 设置默认的构建类型为RelWithDebInfo
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE RelWithDebInfo)
