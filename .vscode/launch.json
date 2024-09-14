@@ -8,7 +8,7 @@
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/bin/mysort",
+      "program": "${workspaceFolder}/bin/dailydebug",
       "args": [],
       "cwd": "${workspaceFolder}"
     }

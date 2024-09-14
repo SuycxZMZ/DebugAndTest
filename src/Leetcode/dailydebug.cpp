@@ -1,59 +1,54 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-const int M = 2e5;
-const int Mod = 1e5;
+int main() {
+  string input;
+  cin >> input;
+  vector<int> v, i, o;
+  int count = 0;
 
-int main()
-{
-    int n;
-    cin >> n;
-    vector<vector<int>> soider(n + 1, vector<int>(4, 0));
-    vector<vector<pair<bool, int>>> grid(M, vector<pair<bool, int>>(M, pair<bool, int>(false, -1)));
-    for (int i = 1; i <= n; ++i)
-    {
-        cin >> soider[i][0] >> soider[i][1] >> soider[i][2] >> soider[i][3];
-        auto tmp = pair<bool, int>(true, i);
-        grid[Mod + soider[i][0]][Mod + soider[i][i]] = std::move(tmp);
+  for (int idx = 0; idx < input.size(); idx++) {
+    if (input[idx] == 'v') {
+      v.push_back(idx);
+    } else if (input[idx] == 'i') {
+      i.push_back(idx);
+    } else if (input[idx] == 'o') {
+      o.push_back(idx);
     }
+  }
 
-    unordered_map<int, vector<int>> adj;
-    int xx = 0, len = 0, x = 0, y = 0;
-    float dis = 0, reDis = 0;
-    for (int i = 1; i <= n; ++i)
-    {
-        x = soider[i][0], y = soider[i][1];
-        xx = soider[i][2];
-        len = soider[i][3];
-        reDis = len * len;
-        // 右上
-        if (xx = 1) {
-            // 右
-            for (int j = Mod + soider[i][0]; j < Mod + soider[i][0] + len && j < M; ++j) {
-                // 上
-                float d_x = (j - x) * (j - x);
-                for (int k = Mod + soider[i][1]; k > Mod + soider[i][1] - len && k >= 0; --k)
-                {
-                    if (d_x + (k - y) * (k - y) < reDis && grid[j][k].first) {
-                        // 这个点的入度加上 i 点
-                        adj[grid[j][k].second].emplace_back(i);
-                    }
-                }
-            }
-        }
-        // 左上
-        if (xx == 2) {
 
-        }
-        // 左下
-        if (xx == 3) {
+  int v1 = 0, i1 = 0, o1 = 0;
+  while (v1 < v.size() && i1 < i.size() && o1 < o.size()) {
 
-        }
-        // 右下
-        if (xx == 4) {
+    if (v[v1] < i[i1] && i[i1] < o[o1]) {
 
-        }
+      int v2 = i1 + 1; 
+      while (v2 < v.size() && v[v2] <= i[i1])
+        v2++;
+
+      if (v2 < v.size() && v[v2] < o[o1]) {
+
+        count++;
+        v1 = v2 + 1; 
+        i1++;
+        o1++;
+      } else {
+
+        i1++;
+        o1++;
+      }
+    } else {
+
+      if (v[v1] >= i[i1])
+        i1++;
+      else if (i[i1] >= o[o1])
+        o1++;
+      else
+        v1++;
     }
+  }
 
+  cout << count << endl;
+  return 0;
 }

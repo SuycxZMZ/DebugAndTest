@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 using namespace std;
 
 // 模拟引用计数类

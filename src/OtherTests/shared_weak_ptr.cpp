@@ -1,7 +1,6 @@
 #include <iostream>
 #include <memory>
 #include <thread>
-#include <functional>
 using namespace std;
 
 /*
