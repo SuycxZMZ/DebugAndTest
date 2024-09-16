@@ -1,11 +1,12 @@
 # 遍历源文件列表
-file(GLOB SOURCE_FILES "*.cpp" 
-    ./Leetcode/*.cpp 
-    ./DPatten/*.cpp 
-    ./ThreadCommunication/*.cpp 
-    ./ACM_INOUT/*.cpp 
-    ./Mem/*.cpp
-    ./GDB/*.cpp)
+file(GLOB SOURCE_FILES "*.cpp"
+  ./Leetcode/*.cpp
+  ./DPatten/*.cpp
+  ./ThreadCommunication/*.cpp
+  ./ACM_INOUT/*.cpp
+  ./Mem/*.cpp
+  ./GDB/*.cpp
+  ./BasicContainer/*.cc)
     
 # 编译每个源文件为可执行文件
 foreach(source_file ${SOURCE_FILES})

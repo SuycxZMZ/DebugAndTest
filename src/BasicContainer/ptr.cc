@@ -72,4 +72,28 @@ private:
   }
 };
 
+template<typename T>
+class uPtr {
+private:
+  T *_ptr;
+  uPtr(uPtr &other);
+  uPtr& operator=(uPtr& other);
+public:
+  uPtr(T *data) : _ptr(data) {}
+  ~uPtr() { delete _ptr; }
+  void release() { delete _ptr; }
+  uPtr() : _ptr(nullptr) {}
+  uPtr(uPtr &&other) {
+    _ptr = other._ptr;
+    other._ptr = nullptr;
+  }
+  uPtr &operator=(uPtr &&other) {
+    if (this != &other) {
+      _ptr = other._ptr;
+      other._ptr = nullptr;
+    }
+    return *this;
+  }
+};
+
 int main() { return 0; }

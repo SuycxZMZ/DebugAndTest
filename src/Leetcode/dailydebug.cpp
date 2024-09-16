@@ -1,54 +1,73 @@
 #include <bits/stdc++.h>
+#include <vector>
+
 using namespace std;
 
+template <typename T>
+void myQsort(vector<T> &input, int start, int end) {
+  if (end == start)
+    return;
+  int l = start, r = end;
+  T privot = input[(l + r) / 2];
+  while (l < r) {
+    while (input[l] < privot)
+      ++l;
+    while (input[r] > privot)
+      --r;
+    std::swap(input[l], input[r]);
+    ++l;
+    --r;
+  }
+  if (r > start)
+    myQsort(input, start, r);
+  if (l < end)
+    myQsort(input, l, end);
+}
+
+void getNext(const string& needle, vector<int>& next) {
+  int j = 0, n = needle.size();
+  int i = 0;
+  while (i < n) {
+    while (j > 0 && needle[i] != needle[j])
+      j = next[j];
+    if (needle[i] == needle[j])
+      ++j;
+    next[i] = j;
+    ++i;
+  }
+}
+
+int strStr(const string &s, const string &needle) {
+  vector<int> next(needle.size(), 0);
+  getNext(needle, next);
+  int ans = -1;
+  int i = 0, j = 0;
+  int n = s.size(), ns = needle.size();
+  while (i < n) {
+    while (j > 0 && s[i] != needle[j])
+      j = next[j];
+    if (s[i] == needle[j])
+      ++j;
+    if (j == ns)
+      return i - j + 1;
+    ++i;
+  }
+  return ans;
+}
+
+
 int main() {
-  string input;
-  cin >> input;
-  vector<int> v, i, o;
-  int count = 0;
 
-  for (int idx = 0; idx < input.size(); idx++) {
-    if (input[idx] == 'v') {
-      v.push_back(idx);
-    } else if (input[idx] == 'i') {
-      i.push_back(idx);
-    } else if (input[idx] == 'o') {
-      o.push_back(idx);
-    }
+  vector<int> input = {1, 12, 16, 2, 4, 6, 5, 7, 11, 22, 16};
+  myQsort(input, 0, input.size() - 1);
+  for (int i : input) {
+    cout << i << " " ;
   }
+  
+  std::cout << " -------------------- KMP -------------------- " << std::endl;
+  string s = "mymymkmpmpmymymykmp";
+  string needle = "ymkmp";
+  cout << strStr(s, needle) << endl;
 
-
-  int v1 = 0, i1 = 0, o1 = 0;
-  while (v1 < v.size() && i1 < i.size() && o1 < o.size()) {
-
-    if (v[v1] < i[i1] && i[i1] < o[o1]) {
-
-      int v2 = i1 + 1; 
-      while (v2 < v.size() && v[v2] <= i[i1])
-        v2++;
-
-      if (v2 < v.size() && v[v2] < o[o1]) {
-
-        count++;
-        v1 = v2 + 1; 
-        i1++;
-        o1++;
-      } else {
-
-        i1++;
-        o1++;
-      }
-    } else {
-
-      if (v[v1] >= i[i1])
-        i1++;
-      else if (i[i1] >= o[o1])
-        o1++;
-      else
-        v1++;
-    }
-  }
-
-  cout << count << endl;
   return 0;
 }
