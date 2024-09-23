@@ -1,91 +1,66 @@
+/**
+ * @file factory.cpp 提供了一种创建对象的接口，但由子类决定要实例化的类是哪一个。
+                     工厂模式让类的实例化推迟到子类。
+ * @author Suycx
+ * @brief
+ * @version 0.1
+ * @date 2024-09-23
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
+
 #include <iostream>
+#include <memory>
 #include <string>
 
-/**
- * @brief 抽象产品类
-*/
-class AbstractProductA {
+// 1. 抽象产品类
+class Animal {
 public:
-    virtual ~AbstractProductA() {}
-    virtual void Operation() = 0;
+  virtual void speak() const = 0; // 纯虚函数
+  virtual ~Animal() {}
 };
 
-/**
- * @brief 具体产品类A
-*/
-class ProductA1 : public AbstractProductA {
+// 2. 具体产品类
+class Dog : public Animal {
 public:
-    void Operation() override { std::cout << "ProductA1 Operation" << std::endl; }
-};
-class ProductA2 : public AbstractProductA {
-public:
-    void Operation() override { std::cout << "ProductA2 Operation" << std::endl; }
+  void speak() const override { std::cout << "Dog: Woof!" << std::endl; }
 };
 
-
-class AbstractProductB {
+class Cat : public Animal {
 public:
-    virtual ~AbstractProductB() {}
-    virtual void Operation() = 0;
-};
-/**
- * @brief 具体产品类B
-*/
-class ProductB1 : public AbstractProductB {
-public:
-    void Operation() override { std::cout << "ProductB1 Operation" << std::endl; }
-};
-class ProductB2 : public AbstractProductB {
-public:
-    void Operation() override { std::cout << "ProductB2 Operation" << std::endl; }
+  void speak() const override { std::cout << "Cat: Meow!" << std::endl; }
 };
 
-/**
- * @brief 抽象工厂类
-*/
-class AbstractFactory {
+// 3. 工厂类
+class AnimalFactory {
 public:
-    virtual AbstractProductA* createProductA() = 0;
-    virtual AbstractProductB* createProductB() = 0;
-    virtual ~AbstractFactory() {}
-};
-
-/**
- * @brief 具体工厂类
-*/
-class ConcreteFactory1 : public AbstractFactory {
-public:
-    AbstractProductA* createProductA() override { return new ProductA1(); }
-    AbstractProductB* createProductB() override { return new ProductB1(); }
-};
-class ConcreteFactory2 : public AbstractFactory {
-public:
-    AbstractProductA* createProductA() override { return new ProductA2(); }
-    AbstractProductB* createProductB() override { return new ProductB2(); }
+  // 使用智能指针管理对象生命周期
+  static std::unique_ptr<Animal> createAnimal(const std::string &type) {
+    if (type == "Dog") {
+      return std::make_unique<Dog>();
+    } else if (type == "Cat") {
+      return std::make_unique<Cat>();
+    } else {
+      return nullptr;
+    }
+  }
 };
 
 int main() {
-    AbstractFactory * af1 = new ConcreteFactory1();
-    // 工厂1创建产品A
-    AbstractProductA * apa1 = af1->createProductA();
-    apa1->Operation();
-    // 工厂1创建产品B
-    AbstractProductB * apb1 = af1->createProductB();
-    apb1->Operation();
+  std::string animalType;
 
-    // 工厂2创建产品A
-    AbstractFactory * af2 = new ConcreteFactory2();
-    AbstractProductA * apa2 = af2->createProductA();
-    apa2->Operation();
-    // 工厂2创建产品B
-    AbstractProductB * apb2 = af2->createProductB();
-    apb2->Operation();
+  std::cout << "Enter animal type (Dog/Cat): ";
+  std::cin >> animalType;
 
-    delete apa1;
-    delete apb1;
-    delete apa2;
-    delete apb2;
-    delete af1;
-    delete af2;
-    return 0;
+  // 4. 使用工厂创建对象
+  std::unique_ptr<Animal> animal = AnimalFactory::createAnimal(animalType);
+
+  if (animal) {
+    animal->speak();
+  } else {
+    std::cout << "Unknown animal type!" << std::endl;
+  }
+
+  return 0;
 }

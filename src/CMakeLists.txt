@@ -6,7 +6,8 @@ file(GLOB SOURCE_FILES "*.cpp"
   ./ACM_INOUT/*.cpp
   ./Mem/*.cpp
   ./GDB/*.cpp
-  ./BasicContainer/*.cc)
+  ./BasicContainer/*.cc
+  ./HW0717/*.cc)
     
 # 编译每个源文件为可执行文件
 foreach(source_file ${SOURCE_FILES})

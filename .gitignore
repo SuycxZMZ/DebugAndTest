@@ -3,4 +3,6 @@ bin/*
 src/leetcode/dailydebug.cpp
 tools/*
 src/MapReduce/wordFiles/*
+cmake-build-debug
 .cache/*
+.idea/*

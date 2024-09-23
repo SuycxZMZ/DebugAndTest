@@ -69,7 +69,7 @@ public:
 private:
     Singleton2() { std::cout << "Singleton2 created" << std::endl; }
     Singleton2(const Singleton2 &) {}
-    Singleton2 &operator=(const Singleton2 &) {}
+    // Singleton2 &operator=(const Singleton2 &) {}
 
 private:
     static Singleton2 *m_instance;
@@ -116,7 +116,7 @@ public:
 private:
     Singleton3() { std::cout << "Singleton3 created" << std::endl; }
     Singleton3(const Singleton3 &) {}
-    Singleton3 &operator=(const Singleton3 &) {}
+    // Singleton3 &operator=(const Singleton3 &) {}
     static Singleton3 *m_instance;
 };
 Singleton3 *Singleton3::m_instance = nullptr;
@@ -147,7 +147,7 @@ public:
 private:
     Singleton4() { std::cout << "Singleton4 created" << std::endl; }
     Singleton4(const Singleton4 &) {}
-    Singleton4 &operator=(const Singleton4 &) {}
+    // Singleton4 &operator=(const Singleton4 &) {}
     static Singleton4 *m_instance;
     static std::mutex m_mutex;
 };

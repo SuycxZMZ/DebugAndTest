@@ -2,7 +2,6 @@
 #define THREADGUARD_H
 
 #include <thread>
-#include <functional>
 
 class threadGuard {
 public:

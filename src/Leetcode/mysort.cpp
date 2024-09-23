@@ -47,11 +47,6 @@ public:
      */
     template <typename T>
     void merge(std::vector<T>& arr, int left, int mid, int right) {
-        // 左边数组长度
-        int n1 = mid - left + 1;
-        // 右边数组长度
-        int n2 = right - mid;
-
         // 临时数组大小为合并后的数组大小
         std::vector<T> tempArr(right - left + 1);
 
@@ -105,13 +100,13 @@ public:
 int main() {
     allSort as;
 
-    std::vector<int> arr = {5, 2, 9, 1, 5, 6, 3, 8, 20, 10, 100, 21, 12};
+    std::vector<int> arr = {1, 12, 16, 2, 4, 6, 5, 7, 11, 22, 16};
     as._qqsort(arr, 0, arr.size() - 1, cmpgreater_int());
     std::cout << "--------------qsort-------------" << std::endl;
     for (int i : arr) std::cout << i << " ";
     std::cout << std::endl;
 
-    std::vector<int> arr2 = {5, 2, 9, 1, 5, 6};
+    std::vector<int> arr2 = {1, 12, 16, 2, 4, 6, 5, 7, 11, 22, 16};
     as.mergeSort(arr2, 0, arr2.size() - 1);
     std::cout << "--------------mergesort-------------" << std::endl;
     for (int i : arr2) std::cout << i << " ";
