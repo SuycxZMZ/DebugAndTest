@@ -8,7 +8,10 @@
 /// 输出
 /// 第一行输出q。之后q行每行输出一个正整数，如果是依赖关系，输出1，否则输出0。
 
+#include <algorithm>
+#include <climits>
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
