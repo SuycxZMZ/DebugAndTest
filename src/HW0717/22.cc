@@ -8,7 +8,8 @@
 /// 输出
 /// 第一行输出q。之后q行每行输出一个正整数，如果是依赖关系，输出1，否则输出0。
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 

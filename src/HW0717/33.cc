@@ -7,7 +7,8 @@
 /// 输出
 /// 在当前预算下最多能体验的次数。
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 

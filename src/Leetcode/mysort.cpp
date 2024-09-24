@@ -1,7 +1,8 @@
 //
 // Created by yuan su on 24-4-23.
 //
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 struct cmpgreater_int {
     bool operator()(const int& a, const int& b) {

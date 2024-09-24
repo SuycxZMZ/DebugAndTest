@@ -6,7 +6,10 @@
 ///  输出
 ///  home usr 1.log
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
