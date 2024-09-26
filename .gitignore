@@ -6,4 +6,4 @@ src/MapReduce/wordFiles/*
 cmake-build-debug
 .cache/*
 .idea/*
-.vscode/*
+/.vscode/*
