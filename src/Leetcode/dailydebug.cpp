@@ -30,7 +30,8 @@ template <typename T> void heapSort(vector<T> &input) {
   }
 }
 
-template <typename T> void qqSotr(vector<T> &input, int left, int right) {
+template <typename T>
+void qqSotr(vector<T> &input, int left, int right) {
   if (left >= right)
     return;
   int l = left, r = right;
